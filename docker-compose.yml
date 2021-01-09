@@ -1,8 +1,14 @@
-version: "3.9"
+version: '3.9'
 services:
-  web:
-    build: .
+  mongodb_container:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: rootpassword
     ports:
-      - "5000:5000"
-  redis:
-    image: "redis:alpine"
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:
